@@ -11,11 +11,12 @@ public class FloridaManGame {
         HeadlineBank.shuffleHeadlines();
         loadNextQuestion();
     }
-    public static void loadNextQuestion() {
+    public static Headline loadNextQuestion() {
         currentHeadline = HeadlineBank.getNextHeadline();
+        return HeadlineBank.getNextHeadline();
     }
     public static boolean checkGuess(String userGuess) {
-        if (userGuess == null){ return false}
+        if (userGuess == null){ return false;}
 
         boolean isCorrect = userGuess.equals(currentHeadline.getKeyword());
         if (isCorrect){

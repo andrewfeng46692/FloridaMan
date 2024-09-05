@@ -1,6 +1,7 @@
 package org.openjfx;
-
+import javafx.scene.control.Label;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
@@ -28,9 +29,9 @@ public class WelcomeMenuController {
 
     @FXML
     private void startButton(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("ViewGame.fxml"));
-        gamePane.getChildren().setAll(pane);
+        FloridaManGame.initializeGame();
     }
 
-
+// AnchorPane pane = FXMLLoader.load(getClass().getResource("ViewGame.fxml"));
+//        gamePane.getChildren().setAll(pane);
 }
