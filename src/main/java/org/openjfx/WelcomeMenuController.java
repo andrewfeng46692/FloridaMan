@@ -1,10 +1,13 @@
 package org.openjfx;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -29,9 +32,13 @@ public class WelcomeMenuController {
 
     @FXML
     private void startButton(ActionEvent event) throws IOException {
-        FloridaManGame.initializeGame();
-    }
+        Parent root = FXMLLoader.load(getClass().getResource("gameQuestions.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
-// AnchorPane pane = FXMLLoader.load(getClass().getResource("ViewGame.fxml"));
-//        gamePane.getChildren().setAll(pane);
+        Stage stage = (Stage) startButton.getScene().getWindow();
+        stage.setTitle("scene");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

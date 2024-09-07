@@ -14,7 +14,6 @@ public class HeadlineBank {
         if (headlines.size == 0){
             return null;
         }
-        //question for Mr. U
         Headline x = headlines.getFirst();
         headlines.removeFirst();
         return x;
