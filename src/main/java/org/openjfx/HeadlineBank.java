@@ -1,29 +1,30 @@
 package org.openjfx;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class HeadlineBank {
-    private static ArrayList<Headline> headlines = new ArrayList<>();
 
+    private List<Headline> headlines; // List of all headlines (questions)
 
-    public static void shuffleHeadlines(){
-        Collections.shuffle(headlines);
+    public HeadlineBank() {
+        headlines = new ArrayList<>();
     }
 
-    public static Headline getNextHeadline(){
-        if (headlines.size == 0){
-            return null;
-        }
-        Headline x = headlines.getFirst();
-        headlines.removeFirst();
-        return x;
+    public void addHeadline(Headline headline) {
+        headlines.add(headline);
     }
 
-
-    public static ArrayList<Headline> getHeadlines() {
-        return headlines;
+    public void shuffleHeadlines() {
+        Collections.shuffle(headlines); // Shuffle for randomness
     }
-    public static void setHeadlines(ArrayList<Headline> headlines) {
-        HeadlineBank.headlines = headlines;
+
+    public Headline getNextHeadline() {
+        return headlines.remove(0); // Return and remove the first headline
+    }
+
+    public boolean hasMoreHeadlines() {
+        return !headlines.isEmpty();
     }
 }

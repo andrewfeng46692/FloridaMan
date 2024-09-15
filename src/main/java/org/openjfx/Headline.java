@@ -1,46 +1,63 @@
+
 package org.openjfx;
+
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Headline {
-    private String storyContent;
-    private String keyword;
-    private ArrayList<String> options;
 
-    public Headline(String storyContent, String keyword, ArrayList<String> otherOptions) {
-        this.storyContent = storyContent;
+public class Headline {
+    // Fields for the story, the keyword, and the options
+    private String story;
+    private String keyword;
+    private String[] options;
+
+
+    // Constructor
+    public Headline(String story, String keyword, String[] options) {
+        this.story = story;
         this.keyword = keyword;
-        this.options = new ArrayList<>(otherOptions);
-        this.options.add(keyword);
-        Collections.shuffle(this.options);
+        if (options != null && options.length == 3) {
+            this.options = options;
+        } else {
+            this.options = new String[3]; // Initialize with default values if invalid array size
+        }
+        headlineBank.addHeadline(this); // Automatically add to HeadlineBank
     }
 
+
+    // Getters and Setters
     public String getStoryContent() {
         return storyContent;
     }
-
     public String getKeyword() {
         return keyword;
     }
-
-    public ArrayList<String> getOptions() {
+    public String[] getOptions() {
         return options;
     }
-
     public void setStoryContent(String storyContent) {
         this.storyContent = storyContent;
     }
-
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
-
-    public void setOtherOptions(ArrayList<String> options) {
-        this.options = options;
+    public void setOptions(String[] options) {
+        if (options != null && options.length == 3) {
+            this.options = options;
+        }
     }
-    public String removedHeadline(String storyContent, String keyword) {
-        return storyContent.replace(keyword, "________");
+
+
+    // Replace the keyword in the story with underscores
+    public String getStoryWithBlanks() {
+        return story.replace(keyword, "_____");
+    }
+
+
+    // A method to validate the user’s guess
+    public boolean isCorrectGuess(String guess) {
+        return this.keyword.equalsIgnoreCase(guess);
     }
 }

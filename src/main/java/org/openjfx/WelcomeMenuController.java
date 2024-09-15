@@ -16,23 +16,24 @@ import java.util.Objects;
 
 public class WelcomeMenuController {
     @FXML
-    private Label gameTitleLabel;
+    private Label welcomeLabel;
 
     @FXML
     private Button startButton;
 
     @FXML
-    public void initialize() {
-        gameTitleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 61");
-        gameTitleLabel.setText("The 100% grade Florida Man Game");
-    }
-
-    @FXML
     AnchorPane gamePane;
 
     @FXML
-    private void startButton(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("gameQuestions.fxml"));
+    public void initialize() {
+        welcomeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 61");
+        welcomeLabel.setText("The 100%(now only 95%) grade Florida Man Game");
+        startButton.setText("Start Game");
+    }
+
+    @FXML
+    private void HandleStartButtonAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("gameQuestions.fxml")));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
@@ -41,4 +42,5 @@ public class WelcomeMenuController {
         stage.setScene(scene);
         stage.show();
     }
+
 }
