@@ -12,6 +12,8 @@ public class Headline {
     private String story;
     private String keyword;
     private String[] options;
+    private HeadlineBank headlineBank = new HeadlineBank();  // Instance of HeadlineBank
+
 
 
     // Constructor
@@ -28,8 +30,8 @@ public class Headline {
 
 
     // Getters and Setters
-    public String getStoryContent() {
-        return storyContent;
+    public String getStory() {
+        return story;
     }
     public String getKeyword() {
         return keyword;
@@ -38,7 +40,7 @@ public class Headline {
         return options;
     }
     public void setStoryContent(String storyContent) {
-        this.storyContent = storyContent;
+        this.story = storyContent;
     }
     public void setKeyword(String keyword) {
         this.keyword = keyword;

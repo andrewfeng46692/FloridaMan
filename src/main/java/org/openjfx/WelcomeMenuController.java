@@ -32,15 +32,16 @@ public class WelcomeMenuController {
     }
 
     @FXML
-    private void HandleStartButtonAction(ActionEvent event) throws IOException {
+    public void HandleStartButtonAction(javafx.event.ActionEvent actionEvent) throws IOException {
+        System.out.println("Start button clicked");
+
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("gameQuestions.fxml")));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
 
         Stage stage = (Stage) startButton.getScene().getWindow();
-        stage.setTitle("scene");
         stage.setScene(scene);
+        stage.setTitle("Game Questions");
         stage.show();
     }
-
 }

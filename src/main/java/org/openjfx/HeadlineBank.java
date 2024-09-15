@@ -6,7 +6,8 @@ import java.util.List;
 
 public class HeadlineBank {
 
-    private List<Headline> headlines; // List of all headlines (questions)
+    private static ArrayList<Headline> headlines; // ArrayList of all headlines (questions)
+    //static
 
     public HeadlineBank() {
         headlines = new ArrayList<>();
@@ -16,15 +17,23 @@ public class HeadlineBank {
         headlines.add(headline);
     }
 
+    public void addHeadlines(ArrayList<Headline> headlines) {
+        HeadlineBank.headlines = headlines;
+    }
+
     public void shuffleHeadlines() {
         Collections.shuffle(headlines); // Shuffle for randomness
     }
 
     public Headline getNextHeadline() {
-        return headlines.remove(0); // Return and remove the first headline
+        return headlines.removeFirst(); // Return and remove the first headline
     }
 
     public boolean hasMoreHeadlines() {
         return !headlines.isEmpty();
+    }
+
+    public int size() {
+        return headlines.size();
     }
 }
