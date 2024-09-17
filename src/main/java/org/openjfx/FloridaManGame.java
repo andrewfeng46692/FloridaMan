@@ -1,12 +1,18 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package org.openjfx;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.util.Objects;
 
 public class FloridaManGame extends Application {
     private static int correctGuesses = 0;
@@ -14,14 +20,15 @@ public class FloridaManGame extends Application {
     private static double percentageCorrect = 0.0;
     private static int questionsLeft;
     private static Headline currentHeadline;
-    private HeadlineBank headlineBank = new HeadlineBank();  // Instance of HeadlineBank
+    private HeadlineBank headlineBank = new HeadlineBank();
 
-    @Override
+    public FloridaManGame() {
+    }
+
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("start.fxml")));
+        Parent root = (Parent)FXMLLoader.load((URL)Objects.requireNonNull(this.getClass().getResource("start.fxml")));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
-
+        scene.getStylesheets().add(((URL)Objects.requireNonNull(this.getClass().getResource("styles.css"))).toExternalForm());
         stage.setTitle("Florida Man Game");
         stage.setScene(scene);
         stage.show();
@@ -32,15 +39,14 @@ public class FloridaManGame extends Application {
     }
 
     public void initializeGame() {
-        loadHeadlines();
-        headlineBank.shuffleHeadlines();
-        loadNextQuestion();
-        questionsLeft = headlineBank.size();  // Correct size access
+        this.loadHeadlines();
+        this.headlineBank.shuffleHeadlines();
+        this.loadNextQuestion();
+        questionsLeft = this.headlineBank.size();
     }
 
-    // Load sample headlines
     private void loadHeadlines() {
-        ArrayList<Headline> sampleHeadlines = new ArrayList<>();
+        ArrayList<Headline> sampleHeadlines = new ArrayList();
         sampleHeadlines.add(new Headline("Florida Man wrestles with a(n) ______.", "alligator", new String[]{"shark", "python", "cat"}));
         sampleHeadlines.add(new Headline("Florida Man steals ______ from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"}));
         sampleHeadlines.add(new Headline("Florida Man drives through a fast-food restaurant with a ______ on his lap.", "cat", new String[]{"dog", "parrot", "turtle"}));
@@ -51,43 +57,42 @@ public class FloridaManGame extends Application {
         sampleHeadlines.add(new Headline("Florida Man caught trying to smuggle ______ into a theme park.", "python", new String[]{"iguana", "ferret", "parrot"}));
         sampleHeadlines.add(new Headline("Florida Man breaks into home and tries to cook ______.", "spaghetti", new String[]{"steak", "chicken", "pancakes"}));
         sampleHeadlines.add(new Headline("Florida Man attacked by a(n) ______ while fishing in his backyard.", "crocodile", new String[]{"bird", "snake", "cat"}));
-
-        headlineBank.addHeadlines(sampleHeadlines);
+        this.headlineBank.addHeadlines(sampleHeadlines);
     }
 
-    // Load the next question from the HeadlineBank
     public void loadNextQuestion() {
-        if (headlineBank.hasMoreHeadlines()) {
-            currentHeadline = headlineBank.getNextHeadline();
+        if (this.headlineBank.hasMoreHeadlines()) {
+            currentHeadline = this.headlineBank.getNextHeadline();
         } else {
-            currentHeadline = null; // If no more questions, set to null
+            currentHeadline = null;
         }
+
     }
 
-    // Check the user's guess against the correct keyword
     public boolean checkGuess(String userGuess) {
-        if (currentHeadline == null || userGuess == null) return false;
+        if (currentHeadline != null && userGuess != null) {
+            boolean isCorrect = userGuess.equalsIgnoreCase(currentHeadline.getKeyword());
+            if (isCorrect) {
+                ++correctGuesses;
+            } else {
+                ++incorrectGuesses;
+            }
 
-        boolean isCorrect = userGuess.equalsIgnoreCase(currentHeadline.getKeyword());
-        if (isCorrect) {
-            correctGuesses++;
+            this.updatePercentageCorrect();
+            return isCorrect;
         } else {
-            incorrectGuesses++;
+            return false;
         }
-
-        // Update percentage of correct answers
-        updatePercentageCorrect();
-        return isCorrect;
     }
 
-    // Update the percentage of correct answers
     private void updatePercentageCorrect() {
         int totalQuestionsAnswered = correctGuesses + incorrectGuesses;
         if (totalQuestionsAnswered > 0) {
-            percentageCorrect = (double) correctGuesses / totalQuestionsAnswered * 100;
+            percentageCorrect = (double)correctGuesses / (double)totalQuestionsAnswered * 100.0;
         } else {
             percentageCorrect = 0.0;
         }
+
     }
 
     public static int getCorrectGuesses() {
@@ -110,7 +115,6 @@ public class FloridaManGame extends Application {
         return currentHeadline;
     }
 
-    // Setters for game statistics
     public static void setQuestionsLeft(int questionsLeft) {
         FloridaManGame.questionsLeft = questionsLeft;
     }

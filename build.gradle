@@ -6,13 +6,24 @@ plugins {
 repositories {
     mavenCentral()
 }
-
+application {
+    mainClass = 'org.openjfx.FloridaManGame'  // Set your main class here
+}
 dependencies {
+    implementation 'org.openjfx:javafx-controls:17.0.2'  // JavaFX version 17, adjust as needed
+    implementation 'org.openjfx:javafx-fxml:17.0.2'      // JavaFX FXML support
 }
 
 javafx {
     version = "21"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
-
+tasks.named('run') {
+    doFirst {
+        jvmArgs = [
+                '--module-path', classpath.asPath,
+                '--add-modules', 'javafx.controls,javafx.fxml'
+        ]
+    }
+}
 mainClassName = 'org.openjfx.FloridaManGame'

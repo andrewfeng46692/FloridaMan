@@ -112,6 +112,9 @@ public class GameViewController {
         // Update player stats (correct guesses, incorrect guesses, percentage)
         updatePlayerStats();
 
+        // Reset the selected radio button (clear selection)
+        answerGroup.selectToggle(null);  // Deselect any selected radio button
+
         // Change the submit button text to "Next"
         submitButton.setText("Next");
 
@@ -119,7 +122,6 @@ public class GameViewController {
         game.loadNextQuestion();
         loadQuestion();
     }
-
     private void updatePlayerStats() {
         // Get the game statistics
         int correctGuesses = FloridaManGame.getCorrectGuesses();

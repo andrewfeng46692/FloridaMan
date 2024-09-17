@@ -9,7 +9,7 @@
    <children>
       <Label fx:id="welcomeLabel" layoutX="20.0" layoutY="24.0" prefHeight="150.0" prefWidth="554.0" text="Welcome to the Florida Man Game!" AnchorPane.bottomAnchor="226.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="24.0">
          <font>
-            <Font size="36.0" />
+            <Font size="28.0" />
          </font></Label>
       <Button fx:id="startButton" layoutX="237.0" layoutY="200.0" mnemonicParsing="false" onAction="#HandleStartButtonAction" prefHeight="68.0" prefWidth="126.0" text="Start Game" AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="237.0" AnchorPane.rightAnchor="237.0" AnchorPane.topAnchor="200.0" />
    </children>
