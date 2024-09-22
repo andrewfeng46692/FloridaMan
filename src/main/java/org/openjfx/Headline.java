@@ -12,7 +12,6 @@ public class Headline {
     private String story;
     private String keyword;
     private String[] options;
-    private HeadlineBank headlineBank = new HeadlineBank();  // Instance of HeadlineBank
 
 
 
@@ -23,9 +22,9 @@ public class Headline {
         if (options != null && options.length == 3) {
             this.options = options;
         } else {
-            this.options = new String[3]; // Initialize with default values if invalid array size
+            this.options = new String[3];
         }
-        headlineBank.addHeadline(this); // Automatically add to HeadlineBank
+        HeadlineBank.addHeadline(this); // Automatically add to HeadlineBank
     }
 
 
@@ -52,7 +51,7 @@ public class Headline {
     }
 
 
-    // Replace the keyword in the story with underscores
+    // Replace the keyword in the story with blank
     public String getStoryWithBlanks() {
         return story.replace(keyword, "_____");
     }

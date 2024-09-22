@@ -6,34 +6,30 @@ import java.util.List;
 
 public class HeadlineBank {
 
-    private static ArrayList<Headline> headlines; // ArrayList of all headlines (questions)
+    private static ArrayList<Headline> headlines; // ArrayList of all headlines
     //static
 
-    public HeadlineBank() {
-        headlines = new ArrayList<>();
+
+    // Shuffle for randomness
+    public static void shuffleHeadlines() {
+        Collections.shuffle(headlines);
     }
 
-    public void addHeadline(Headline headline) {
-        headlines.add(headline);
+    //getters and setters
+    public static void addHeadline(Headline headline) {headlines.add(headline);}
+    public static void addHeadlines(ArrayList<Headline> headlines) {HeadlineBank.headlines = headlines;}
+    public static Headline getNextHeadline() {
+        if (!headlines.isEmpty()) {
+            return headlines.remove(0);  // Return and remove the first headline
+        }
+        return null;  // No more headlines
     }
 
-    public void addHeadlines(ArrayList<Headline> headlines) {
-        HeadlineBank.headlines = headlines;
-    }
-
-    public void shuffleHeadlines() {
-        Collections.shuffle(headlines); // Shuffle for randomness
-    }
-
-    public Headline getNextHeadline() {
-        return headlines.removeFirst(); // Return and remove the first headline
-    }
-
-    public boolean hasMoreHeadlines() {
+    public static boolean hasMoreHeadlines() {
         return !headlines.isEmpty();
     }
 
-    public int size() {
+    public static int size() {
         return headlines.size();
     }
 }
