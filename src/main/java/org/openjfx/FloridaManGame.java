@@ -39,23 +39,23 @@ public class FloridaManGame extends Application {
     }
 
     private void loadHeadlines() {
-        new Headline("Florida Man wrestles with a(n) ______.", "alligator", new String[]{"shark", "python", "cat"});
-        new Headline("Florida Man steals ______ from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
-        new Headline("Florida Man drives through a fast-food restaurant with a ______ on his lap.", "cat", new String[]{"dog", "parrot", "turtle"});
-        new Headline("Florida Man arrested for throwing ______ at his neighbor.", "gator", new String[]{"sandwich", "shoe", "brick"});
-        new Headline("Florida Man runs from cops while holding a(n) ______.", "iguana", new String[]{"baby", "beer", "pizza"});
-        new Headline("Florida Man arrested for trying to ride a(n) ______ down the highway.", "lawnmower", new String[]{"horse", "bicycle", "golf cart"});
-        new Headline("Florida Man calls 911 to report stolen ______.", "beer", new String[]{"money", "car", "crocodile"});
-        new Headline("Florida Man caught trying to smuggle ______ into a theme park.", "python", new String[]{"iguana", "ferret", "parrot"});
-        new Headline("Florida Man breaks into home and tries to cook ______.", "spaghetti", new String[]{"steak", "chicken", "pancakes"});
-        new Headline("Florida Man attacked by a(n) ______ while fishing in his backyard.", "crocodile", new String[]{"bird", "snake", "cat"});
+        new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
+        new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
+        new Headline("Florida Man drives through a fast-food restaurant with a cat on his lap.", "cat", new String[]{"dog", "parrot", "turtle"});
+        new Headline("Florida Man arrested for throwing gator at his neighbor.", "gator", new String[]{"sandwich", "shoe", "brick"});
+        new Headline("Florida Man runs from cops while holding a(n) iguana.", "iguana", new String[]{"baby", "beer", "pizza"});
+        new Headline("Florida Man arrested for trying to ride a(n) lawnmower down the highway.", "lawnmower", new String[]{"horse", "bicycle", "golf cart"});
+        new Headline("Florida Man calls 911 to report stolen beer.", "beer", new String[]{"money", "car", "crocodile"});
+        new Headline("Florida Man caught trying to smuggle python into a theme park.", "python", new String[]{"iguana", "ferret", "parrot"});
+        new Headline("Florida Man breaks into home and tries to cook spaghetti.", "spaghetti", new String[]{"steak", "chicken", "pancakes"});
+        new Headline("Florida Man attacked by a(n) crocodile while fishing in his backyard.", "crocodile", new String[]{"bird", "snake", "cat"});
 
     }
 
     public void loadNextQuestion() {
         if (HeadlineBank.hasMoreHeadlines()) {
             currentHeadline = HeadlineBank.getNextHeadline();
-            questionsLeft--;
+            questionsLeft = HeadlineBank.size();
         } else {
             currentHeadline = null;  // Set to null when no more headlines are available
         }
@@ -117,5 +117,14 @@ public class FloridaManGame extends Application {
     }
     public int getHeadlineBankSize() {
         return HeadlineBank.size();  // Get the number of headlines left
+    }
+    public void resetGame() {
+        // Reset game variables (e.g., scores, questions)
+        correctGuesses = 0;
+        incorrectGuesses = 0;
+        percentageCorrect = 0.0;
+        questionsLeft = getHeadlineBankSize();
+        loadNextQuestion();
+        System.out.println("Game has been reset.");
     }
 }

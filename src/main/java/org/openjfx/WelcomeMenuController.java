@@ -29,7 +29,7 @@ public class WelcomeMenuController {
     @FXML
     AnchorPane gamePane;
 
-    private FloridaManGame game = new FloridaManGame();
+    private final FloridaManGame game = new FloridaManGame();
 
     public WelcomeMenuController() {
     }
@@ -46,7 +46,6 @@ public class WelcomeMenuController {
     public void HandleStartButtonAction(ActionEvent actionEvent) throws IOException {
         System.out.println("Start button clicked");
 
-        // Initialize the game here before loading the next screen
         game.initializeGame();
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("gameQuestions.fxml")));

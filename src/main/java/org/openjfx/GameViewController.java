@@ -11,6 +11,24 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.application.Platform;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 
 public class GameViewController {
     @FXML
@@ -53,7 +71,7 @@ public class GameViewController {
         if (game.getQuestionsLeft() > 0 && game.getCurrentHeadline() != null) {
             // Load the current headline and its options
             Headline currentHeadline = game.getCurrentHeadline();
-            questionLabel.setText(currentHeadline.getStoryWithBlanks());
+            questionLabel.setText(currentHeadline.getStory());
 
             ArrayList<String> options = new ArrayList<>();
             Collections.addAll(options, currentHeadline.getOptions());
@@ -114,6 +132,7 @@ public class GameViewController {
         }
     }
 
+
     // Update the player stats in the UI
     private void updatePlayerStats() {
         int correctGuesses = game.getCorrectGuesses();
@@ -143,6 +162,7 @@ public class GameViewController {
         exitButton.setVisible(true);
 
         // Hide the game-related buttons
+        questionLabel.setVisible(false);
         submitButton.setVisible(false);
         option1.setVisible(false);
         option2.setVisible(false);
@@ -151,26 +171,32 @@ public class GameViewController {
     }
 
     @FXML
-    private void handleReplay() {
-        // Reset the game and hide the Game Over screen
-        resetGame();
-        gameOverLabel.setVisible(false);
-        replayButton.setVisible(false);
-        exitButton.setVisible(false);
+    private void handleReplay() throws IOException {
+        System.out.println("Replay button clicked! Returning to the start screen.");
 
-        // Show the game-related buttons
-        submitButton.setVisible(true);
-        option1.setVisible(true);
-        option2.setVisible(true);
-        option3.setVisible(true);
-        option4.setVisible(true);
+        // Optional: Reset the game state if needed
+        game.resetGame();  // Assuming resetGame is defined in FloridaManGame
+
+        // Load the start screen FXML (start.fxml)
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("start.fxml"));
+        Parent root = loader.load();
+
+        // Get the current stage and set the scene back to the start screen
+        Stage stage = (Stage) replayButton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Florida Man Game - Start");
+        stage.show();
     }
 
     private void resetGame() {
-        game.initializeGame();  // Re-initialize the game
-        loadQuestion();
-        gameOver = false;
-        feedbackLabel.setVisible(false);
+        game.setCorrectGuesses(0);
+        game.setIncorrectGuesses(0);
+        game.setPercentageCorrect(0.0);
+        game.setQuestionsLeft(HeadlineBank.size());  // Reset question count based on available headlines
+        HeadlineBank.shuffleHeadlines();  // Shuffle the questions to randomize order
+        game.loadNextQuestion();  // Load the first question after reset
+        System.out.println("Game has been reset.");
     }
 
     @FXML

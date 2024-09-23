@@ -14,10 +14,9 @@ public class Headline {
     private String[] options;
 
 
-
     // Constructor
     public Headline(String story, String keyword, String[] options) {
-        this.story = story;
+        this.story = story.replaceAll(keyword, "_____");
         this.keyword = keyword;
         if (options != null && options.length == 3) {
             this.options = options;

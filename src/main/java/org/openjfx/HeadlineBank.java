@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class HeadlineBank {
+public  class HeadlineBank {
 
-    private static ArrayList<Headline> headlines; // ArrayList of all headlines
+    private static ArrayList<Headline> headlines=new ArrayList<>(); // ArrayList of all headlines
     //static
 
 
@@ -19,13 +19,13 @@ public class HeadlineBank {
     public static void addHeadline(Headline headline) {headlines.add(headline);}
     public static void addHeadlines(ArrayList<Headline> headlines) {HeadlineBank.headlines = headlines;}
     public static Headline getNextHeadline() {
-        if (!headlines.isEmpty()) {
+        if (hasMoreHeadlines()) {
             return headlines.remove(0);  // Return and remove the first headline
         }
         return null;  // No more headlines
     }
 
-    public static boolean hasMoreHeadlines() {
+    public static boolean hasMoreHeadlines(){
         return !headlines.isEmpty();
     }
 
