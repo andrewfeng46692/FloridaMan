@@ -60,8 +60,10 @@ public class GameViewController {
         exitButton.setVisible(false);
 
         // Initialize the game when the controller starts
-        game.initializeGame();  // Ensure the game is properly initialized
+        game.initializeGame();
+        System.out.println("left:"+game.getQuestionsLeft());
         loadQuestion();
+
     }
 
     private void loadQuestion() {
@@ -71,6 +73,7 @@ public class GameViewController {
         if (game.getQuestionsLeft() > 0 && game.getCurrentHeadline() != null) {
             // Load the current headline and its options
             Headline currentHeadline = game.getCurrentHeadline();
+
             questionLabel.setText(currentHeadline.getStory());
 
             ArrayList<String> options = new ArrayList<>();
@@ -84,6 +87,7 @@ public class GameViewController {
             option4.setText(options.get(3));
 
             submitButton.setText("Submit");
+
         } else {
             // Game over: show Game Over screen
             showGameOver();
@@ -118,6 +122,7 @@ public class GameViewController {
                     submitButton.setText("Next");
                 }
             } else if (submitButton.getText().equals("Next")) {
+
                 // Load the next question if "Next" is clicked
                 game.loadNextQuestion();
                 loadQuestion();

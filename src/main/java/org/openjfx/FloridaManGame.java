@@ -32,36 +32,34 @@ public class FloridaManGame extends Application {
     }
 
     public void initializeGame() {
-        this.loadHeadlines();
+
+        loadHeadlines();
         HeadlineBank.shuffleHeadlines();
         this.questionsLeft = getHeadlineBankSize();  // Initialize the number of questions AFTER loading headlines
         this.loadNextQuestion();  // Load the first question
+        System.out.println(currentHeadline.getStory());
     }
 
     private void loadHeadlines() {
         new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
         new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
-        new Headline("Florida Man drives through a fast-food restaurant with a cat on his lap.", "cat", new String[]{"dog", "parrot", "turtle"});
-        new Headline("Florida Man arrested for throwing gator at his neighbor.", "gator", new String[]{"sandwich", "shoe", "brick"});
-        new Headline("Florida Man runs from cops while holding a(n) iguana.", "iguana", new String[]{"baby", "beer", "pizza"});
-        new Headline("Florida Man arrested for trying to ride a(n) lawnmower down the highway.", "lawnmower", new String[]{"horse", "bicycle", "golf cart"});
-        new Headline("Florida Man calls 911 to report stolen beer.", "beer", new String[]{"money", "car", "crocodile"});
-        new Headline("Florida Man caught trying to smuggle python into a theme park.", "python", new String[]{"iguana", "ferret", "parrot"});
-        new Headline("Florida Man breaks into home and tries to cook spaghetti.", "spaghetti", new String[]{"steak", "chicken", "pancakes"});
-        new Headline("Florida Man attacked by a(n) crocodile while fishing in his backyard.", "crocodile", new String[]{"bird", "snake", "cat"});
+        new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
+        new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
+
 
     }
 
     public void loadNextQuestion() {
         if (HeadlineBank.hasMoreHeadlines()) {
             currentHeadline = HeadlineBank.getNextHeadline();
-            questionsLeft = HeadlineBank.size();
+            questionsLeft--;
         } else {
             currentHeadline = null;  // Set to null when no more headlines are available
         }
     }
 
     public boolean checkGuess(String userGuess) {
+
         if (currentHeadline != null && userGuess != null) {
             boolean isCorrect = userGuess.equalsIgnoreCase(currentHeadline.getKeyword());
             if (isCorrect) {
@@ -123,8 +121,8 @@ public class FloridaManGame extends Application {
         correctGuesses = 0;
         incorrectGuesses = 0;
         percentageCorrect = 0.0;
-        questionsLeft = getHeadlineBankSize();
-        loadNextQuestion();
+        HeadlineBank.clearHeadlines();
+        initializeGame();
         System.out.println("Game has been reset.");
     }
 }
