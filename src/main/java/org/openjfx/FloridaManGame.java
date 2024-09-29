@@ -10,11 +10,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class FloridaManGame extends Application {
-    private int correctGuesses = 0;
-    private int incorrectGuesses = 0;
-    private double percentageCorrect = 0.0;
-    private int questionsLeft;
-    private Headline currentHeadline;
+    //Static variables
+    private static int correctGuesses = 0;
+    private static int incorrectGuesses = 0;
+    private static double percentageCorrect = 0.0;
+    private static int questionsLeft;
+    private static Headline currentHeadline;
 
 
     public void start(Stage stage) throws Exception {
@@ -33,31 +34,38 @@ public class FloridaManGame extends Application {
 
     public void initializeGame() {
 
+        HeadlineBank.clearHeadlines();
         loadHeadlines();
         HeadlineBank.shuffleHeadlines();
-        this.questionsLeft = getHeadlineBankSize();  // Initialize the number of questions AFTER loading headlines
-        this.loadNextQuestion();  // Load the first question
-        System.out.println(currentHeadline.getStory());
+        questionsLeft = HeadlineBank.size();
+        loadNextQuestion();  // Load the first question
     }
 
+    //A method to initialize the Headline objects
     private void loadHeadlines() {
         new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
-        new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
-        new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
-        new Headline("Florida Man steals pizza from the grocery store.", "pizza", new String[]{"apples", "bread", "bananas"});
+        new Headline("Florida Man drives through a fast-food restaurant with a cat on his lap.", "cat", new String[]{"dog", "parrot", "turtle"});
+        new Headline("Florida Man arrested for throwing gator at his neighbor.", "gator", new String[]{"sandwich", "shoe", "brick"});
+        new Headline("Florida Man runs from cops while holding a(n) iguana.", "iguana", new String[]{"baby", "beer", "pizza"});
+        new Headline("Florida Man arrested for trying to ride a(n) lawnmower down the highway.", "lawnmower", new String[]{"horse", "bicycle", "golf cart"});
+        new Headline("Florida Man calls 911 to report stolen beer.", "beer", new String[]{"money", "car", "crocodile"});
+        new Headline("Florida Man caught trying to smuggle python into a theme park.", "python", new String[]{"iguana", "ferret", "parrot"});
+        new Headline("Florida Man breaks into home and tries to cook spaghetti.", "spaghetti", new String[]{"steak", "chicken", "pancakes"});
+        new Headline("Florida Man attacked by a(n) crocodile while fishing in his backyard.", "crocodile", new String[]{"bird", "snake", "cat"});
+        new Headline("Florida Man killed by a(n) baby lion while visiting the zoo.", "baby lion", new String[]{"taco", "snake", "Texas ranger"});
+
 
 
     }
 
+    //Should set the loaded question to the next available question
+    //A method to “load” the next question (should call the method from HeadlineBank class)
     public void loadNextQuestion() {
-        if (HeadlineBank.hasMoreHeadlines()) {
-            currentHeadline = HeadlineBank.getNextHeadline();
-            questionsLeft--;
-        } else {
-            currentHeadline = null;  // Set to null when no more headlines are available
-        }
+        currentHeadline = HeadlineBank.getNextHeadline();//current headline will be null when HeadlineBank is empty
+        questionsLeft--;
     }
 
+    //A method to check the user’s guess against the correct keyword
     public boolean checkGuess(String userGuess) {
 
         if (currentHeadline != null && userGuess != null) {
@@ -121,7 +129,6 @@ public class FloridaManGame extends Application {
         correctGuesses = 0;
         incorrectGuesses = 0;
         percentageCorrect = 0.0;
-        HeadlineBank.clearHeadlines();
         initializeGame();
         System.out.println("Game has been reset.");
     }

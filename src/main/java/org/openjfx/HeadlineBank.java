@@ -10,10 +10,6 @@ public  class HeadlineBank {
     //static
 
 
-    public static void removeFirstHeadline(){
-        if (hasMoreHeadlines()) {
-            headlines.remove(0);  // Remove the first headline
-        }    }
     // Shuffle for randomness
     public static void shuffleHeadlines() {
         Collections.shuffle(headlines);
@@ -26,15 +22,17 @@ public  class HeadlineBank {
     public static void addHeadlines(ArrayList<Headline> headlines) {HeadlineBank.headlines = headlines;}
     public static Headline getNextHeadline() {
         if (hasMoreHeadlines()) {
-            Headline t = headlines.get(0);// Return and remove the first headline
-            HeadlineBank.removeFirstHeadline();
-            return t;
+            // Return and remove the first headline
+            return headlines.removeFirst();
         }
         return null;  // No more headlines
     }
 
     public static boolean hasMoreHeadlines(){
-        return !headlines.isEmpty();
+        if (headlines.size()!=0){
+            return true;
+        }
+        return false;
     }
 
     public static int size() {

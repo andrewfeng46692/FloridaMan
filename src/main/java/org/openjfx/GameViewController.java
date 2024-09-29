@@ -6,28 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.application.Platform;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-
 import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 
 public class GameViewController {
@@ -61,7 +47,6 @@ public class GameViewController {
 
         // Initialize the game when the controller starts
         game.initializeGame();
-        System.out.println("left:"+game.getQuestionsLeft());
         loadQuestion();
 
     }
@@ -70,7 +55,7 @@ public class GameViewController {
         feedbackLabel.setVisible(false);  // Hide feedback
 
         // Check if there are more headlines and if a valid question is loaded
-        if (game.getQuestionsLeft() > 0 && game.getCurrentHeadline() != null) {
+        if (game.getCurrentHeadline() != null) {
             // Load the current headline and its options
             Headline currentHeadline = game.getCurrentHeadline();
 
@@ -98,7 +83,7 @@ public class GameViewController {
     private void handleSubmitAnswer() {
         // Check if the game is over
         if (gameOver) {
-            resetGame();  // Reset if the game is over
+            game.resetGame();  // Reset if the game is over
         } else {
             // If the submit button is showing "Submit", validate the answer
             if (submitButton.getText().equals("Submit")) {
@@ -194,15 +179,6 @@ public class GameViewController {
         stage.show();
     }
 
-    private void resetGame() {
-        game.setCorrectGuesses(0);
-        game.setIncorrectGuesses(0);
-        game.setPercentageCorrect(0.0);
-        game.setQuestionsLeft(HeadlineBank.size());  // Reset question count based on available headlines
-        HeadlineBank.shuffleHeadlines();  // Shuffle the questions to randomize order
-        game.loadNextQuestion();  // Load the first question after reset
-        System.out.println("Game has been reset.");
-    }
 
     @FXML
     private void handleQuit() {

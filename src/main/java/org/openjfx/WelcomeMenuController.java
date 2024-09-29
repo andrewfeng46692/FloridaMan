@@ -6,7 +6,6 @@
 package org.openjfx;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
